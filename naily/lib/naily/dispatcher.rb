@@ -28,6 +28,26 @@ module Naily
       args
     end
 
+    def download_release(data)
+#       message = {
+#             'method': 'download_release',
+#             'respond_to': 'download_release_resp',
+#             'args': {
+#                 'task_uuid': task.uuid,
+#                 'release_info': {
+#                     'release_id': 1,
+#                     'redhat':{
+#                         'license_type': 'rhsm', #'license_type' in ["rhsm", "rhn"]
+#                         'username':'',
+#                         'password':''
+#                     }
+#                 }
+                
+#             }
+#         }
+# 
+    end
+
     def provision(data)
       Naily.logger.info("'provision' method called with data: #{data.inspect}")
 
