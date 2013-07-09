@@ -15,7 +15,6 @@
 
 from nailgun.api.validators.base import BasicValidator
 from nailgun.errors import errors
-from nailgun.settings import settings
 
 
 class RedHatAcountValidator(BasicValidator):
@@ -24,30 +23,20 @@ class RedHatAcountValidator(BasicValidator):
         d = cls.validate_json(data)
         if not "license_type" in d:
             raise errors.InvalidData(
-                "No License Type specified",
-                #log_message=True
+                "No License Type specified"
             )
         if d["license_type"] not in ["rhsm", "rhn"]:
             raise errors.InvalidData(
-                "Invalid License Type",
-                #log_message=True
+                "Invalid License Type"
             )
         if d["license_type"] == "rhsm":
             if "username" not in d or "password" not in d:
                 raise errors.InvalidData(
-                    "Username or password not specified",
-                    #log_message=True
+                    "Username or password not specified"
                 )
         else:
             if "hostname" not in d or "activation_key" not in d:
                 raise errors.InvalidData(
-                    "Satellite hostname or activation key not specified",
-                    #log_message=True
+                    "Satellite hostname or activation key not specified"
                 )
-        if settings.FAKE_TASKS:
-            if d["username"] != "rheltest":
-                raise errors.InvalidData("Invalid username or password")
-        else:
-           # TODO: check Red Hat Account credentials
-            pass
         return d
